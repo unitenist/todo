@@ -1,0 +1,70 @@
+{% extends "unitenist/base.html" %}
+{% block title %}
+Todo Ekleme      
+{% endblock title %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container" align="center">
+    <h1 class="display-4">Create Todo</h1>
+    <p class="lead">Todo çalışması {{name}} </p>
+    
+  </div>
+  <div class="container" align="left">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="form-group row">
+        <label  class="col-sm-2 col-form-label">Text</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="title" placeholder="Text">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Description</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" name="description" placeholder="Description">
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-2">Finished</div>
+        <div class="col-sm-10">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="finished" >
+            <label class="form-check-label" >
+             Finished
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <button type="submit" class="btn btn-success">Add To List</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="container">
+  <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Todo</th>
+          <th scope="col">Finished</th>
+          <th scope="col">Date</th>
+          <th scope="col">Delete</th>
+          <th scope="col">Update</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for todo in todo_list %} 
+        <tr>
+          <th scope="row">{{ todo.title }}</th>
+          <td>{{ todo.finished }}</td>
+          <td>{{ todo.date }}</td>
+          <td><button class="btn btn-danger">Delete</button></td>
+          <td><button class="btn btn-warning">Update</button></td>
+        </tr>
+        {% endfor %} 
+      </tbody>
+    </table>
+  </div>  
+  {% endblock content %} 

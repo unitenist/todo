@@ -1,0 +1,13 @@
+{% extends "unitenist/base.html" %}
+{% block title %}
+Hakkımızda     
+{% endblock title %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" align="center">
+      <h1 class="display-4">Ana sayfa</h1>
+      <p class="lead">Todo çalışması {{name}} </p>
+      <a href="{% url "create" %}" class="btn btn-outline-success">Add Todo</a>
+    </div>
+  </div>
+  {% endblock content %} 

@@ -1,0 +1,49 @@
+{% extends "unitenist/base.html" %}
+{% block title %}
+Ana Sayfa       
+{% endblock title %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+    <div class="container" align="center">
+      <h1 class="display-4">Ana sayfa</h1>
+      <p class="lead">Todo çalışması {{name}} </p>
+      <a href="{% url "create" %}" class="btn btn-outline-success">Add Todo</a>
+    </div>
+  </div>
+
+
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Todo</th>
+            <th scope="col">Finished</th>
+            <th scope="col">Date</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for todo in todo_list %} 
+          {% if todo.finished == True %}
+          <tr>
+            <th scope="row"><del>{{ todo.title }}</del></th>
+            <td><a href="{% url 'yesfinished' todo.id %}" class="btn btn-outline-danger">Yes</a></td>
+            <td>{{ todo.date }}</td>
+            <td><a href="{% url 'delete' todo.id %}" class="btn btn-danger">Delete</a></td>
+            <td><a class="btn btn-warning">Update</a></td>
+          </tr>
+          {% else %}
+          <tr>
+            <th scope="row">{{ todo.title }}</th>
+            <td><a href="{% url 'nofinished' todo.id %}" class="btn btn-outline-primary">No</a></td>
+            <td>{{ todo.date }}</td>
+            <td><a href="{% url 'delete' todo.id %}" class="btn btn-danger">Delete</a></td>
+            <td><a class="btn btn-warning">Update</a></td>
+          </tr>
+          {% endif %}
+          {% endfor %} 
+        </tbody>
+      </table>
+    </div>  
+    {% endblock content %} 
